@@ -6,10 +6,6 @@
 [![Docker Repository on Quay](https://quay.io/repository/opstree/dynamic-pv-scaler/status "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
 [![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-## Dynamic PV(Persistent Volume) Scaler
-
-![]()
-
 A golang based Kubernetes application which has been created to overcome the scaling issue of Persistent Volume in Kubernetes. This can scale the Persistent Volume on the basis of threshold which you have set.
 
 ## Getting Started
