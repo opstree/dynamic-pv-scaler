@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img src="./static/dynamic-pv-scaler.png">
 </p>
 
