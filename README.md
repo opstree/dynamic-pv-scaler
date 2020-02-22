@@ -1,6 +1,10 @@
+<p align="center">
+  <img src="./static/dynamic-pv-scaler.png">
+</p>
+
 ## Opstree PV(Persistent Volume) Scaler
 
-![](./static/dynamic-pv-scaler.png)
+![]()
 
 A golang based Kubernetes application which has been created to overcome the scaling issue of Persistent Volume in Kubernetes. This can scale the Persistent Volume on the basis of threshold which you have set.
 
@@ -8,7 +12,9 @@ A golang based Kubernetes application which has been created to overcome the sca
 
 ### Architecture
 
-![](./static/dynamic-pv-scaler-arch.png)
+<p align="center">
+  <img src="./static/dynamic-pv-scaler-arch.png">
+</p>
 
 ### Pre-requisites
 
