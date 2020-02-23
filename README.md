@@ -3,7 +3,7 @@
 </p>
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/opstree/dynamic-pv-scaler)](https://goreportcard.com/report/github.com/opstree/dynamic-pv-scaler)
-[![Docker Repository on Quay](https://quay.io/repository/opstree/dynamic-pv-scaler/status "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
+[![Docker Repository on Quay](https://img.shields.io/badge/container-ready-green "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
 [![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ## Dynamic PV(Persistent Volume) Scaler
