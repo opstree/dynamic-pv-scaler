@@ -1,0 +1,20 @@
+branches:
+  only:
+  - master
+  - /^v\d+\.\d+\.\d+$/
+sudo: required
+language: go
+go_import_path: "dynamic-pv-scaler"
+go:
+- "1.13.x"
+env:
+  global:
+  - CHANGE_MINIKUBE_NONE_USER=true
+
+before_install:
+  - go get -u golang.org/x/lint/golint
+
+jobs:
+  include:
+    - stage: build
+      script: make build-code
