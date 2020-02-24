@@ -1,0 +1,18 @@
+---
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.13
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - run: make get-depends
+      - run: make build-code
+      - run: make build-image
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
