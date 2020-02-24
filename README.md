@@ -2,7 +2,7 @@
   <img src="./static/dynamic-pv-scaler.png">
 </p>
 
-[![Build Status](https://travis-ci.com/opstree/dynamic-pv-scaler.svg?branch=master)](https://travis-ci.com/opstree/dynamic-pv-scaler)
+[![CircleCI](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/opstree/dynamic-pv-scaler)](https://goreportcard.com/report/github.com/opstree/dynamic-pv-scaler)
 [![Docker Repository on Quay](https://img.shields.io/badge/container-ready-green "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
 [![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
