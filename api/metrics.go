@@ -16,7 +16,7 @@ var (
 	prometheusURL string
 )
 
-// JSONResponse is a struct for json with the below mentioned keys  
+// JSONResponse is a struct for json with the below mentioned keys
 type JSONResponse struct {
 	Status string `json:"status"`
 	Data   struct {
@@ -43,7 +43,7 @@ type PersistentVolumeList struct {
 	Value               int    `json:"value"`
 }
 
-// PersistentVolumeUsage struct for a json with below mentioned keys 
+// PersistentVolumeUsage struct for a json with below mentioned keys
 type PersistentVolumeUsage struct {
 	PeristentVolumeName string `json:"persistent_volume_name"`
 	Namespace           string `json:"namespace"`
@@ -184,7 +184,8 @@ func GenerateVolumeListQuery(nameSpace string, persistentVolumeName string) *htt
 	req.SetBasicAuth("sky", "sky")
 	return req
 }
-// GenerateVolumeUsageQuery function generates the volume usage query to extract usage info from prometheus 
+
+// GenerateVolumeUsageQuery function generates the volume usage query to extract usage info from prometheus
 func GenerateVolumeUsageQuery(nameSpace string, persistentVolumeName string) *http.Request {
 	logger.LogStdout()
 	prometheusURL = os.Getenv("PROMETHEUS_URL") + "/api/v1/query"

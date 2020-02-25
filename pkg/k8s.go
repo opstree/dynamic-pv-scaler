@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-// PodList defines struct for json key values as mentioned below. 
+// PodList defines struct for json key values as mentioned below.
 type PodList struct {
 	PodName              string `json:"pod_name"`
 	PersistentVolumeName string `json:"persistent_volume_name"`
