@@ -18,6 +18,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run: go get -u golang.org/x/lint/golint
       - run: make lint
   
   formatCode:
