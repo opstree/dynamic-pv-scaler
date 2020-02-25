@@ -18,7 +18,7 @@ var (
 	thresholdPercentage int
 	pvcName             string
 )
-
+// ResizeFunction : Is the main driver code checks for PV usage and scales up the PV when and as defined. 
 func ResizeFunction() {
 	infos := utils.GetConfigurations()
 	logger.LogStdout()

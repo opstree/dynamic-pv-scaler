@@ -9,7 +9,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"strconv"
 )
-
+// PodList defines struct for json key values as mentioned below. 
 type PodList struct {
 	PodName              string `json:"pod_name"`
 	PersistentVolumeName string `json:"persistent_volume_name"`
@@ -45,7 +45,6 @@ func ListPods(namespace string) []PodList {
 
 	return podLists
 }
-
 // DeletePod function takes podName and nameSpace as input and deleted the said pod in the given namespace */
 func DeletePod(podName string, nameSpace string) {
 	logger.LogStdout()
@@ -67,7 +66,6 @@ func DeletePod(podName string, nameSpace string) {
 		"pod": podName,
 	}).Info("Successfully deleted the pod to resize persistent volume")
 }
-
 // ResizePersistentVolume takes pvcName to increase size of  in nameSpace given  and with the value requred  */
 func ResizePersistentVolume(pvcName string, nameSpace string, value int) {
 	logger.LogStdout()

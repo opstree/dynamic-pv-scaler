@@ -34,6 +34,7 @@ type JSONResponse struct {
 		} `json:"result"`
 	} `json:"data"`
 }
+
 // PersistentVolumeList is a struct for json with the below mentioned keys
 type PersistentVolumeList struct {
 	PeristentVolumeName string `json:"persistent_volume_name"`
