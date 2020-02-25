@@ -46,7 +46,7 @@ type PersistentVolumeUsage struct {
 	Namespace           string `json:"namespace"`
 	Value               int    `json:"value"`
 }
-	/* GetPersistentVolumeList takes namespace and PV name as input and returns persistent volume list  */
+	// GetPersistentVolumeList takes namespace and PV name as input and returns persistent volume list  */
 func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) PersistentVolumeList {
 	var qeuryResponse JsonResponse
 	var pvList PersistentVolumeList
@@ -75,7 +75,7 @@ func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) Pers
 	}
 	return pvList
 }
-	/* GetPeristentVolumeUsage takes namespace and PV name as input and return persistent volume usage  */
+	// GetPeristentVolumeUsage takes namespace and PV name as input and return persistent volume usage  */
 func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) PersistentVolumeUsage {
 	var qeuryResponse JsonResponse
 	var pvList PersistentVolumeUsage
@@ -106,7 +106,7 @@ func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) Pers
 	return pvList
 }
 
-	/* GetVolumeListQueryResponse function takes namespace and PV volume name as input and returns list of volumes via prometheus */
+	// GetVolumeListQueryResponse function takes namespace and PV volume name as input and returns list of volumes via prometheus */
 func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 
@@ -129,7 +129,7 @@ func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *
 
 	return resp
 }
-	/* GetVolumeUsageQueryResponse function takes namespace and PV volume name as input and returns Volume Usage via prometheus */
+	// GetVolumeUsageQueryResponse function takes namespace and PV volume name as input and returns Volume Usage via prometheus */
 func GetVolumeUsageQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 
@@ -153,6 +153,7 @@ func GetVolumeUsageQueryResponse(nameSpace string, persistentVolumeName string) 
 	return resp
 }
 
+// GenerateVolumeListQuery function generates the query to extract volume list from prometheus and returns the same
 func GenerateVolumeListQuery(nameSpace string, persistentVolumeName string) *http.Request {
 	logger.LogStdout()
 	prometheusURL = os.Getenv("PROMETHEUS_URL") + "/api/v1/query"
@@ -177,7 +178,7 @@ func GenerateVolumeListQuery(nameSpace string, persistentVolumeName string) *htt
 	req.SetBasicAuth("sky", "sky")
 	return req
 }
-
+// GenerateVolumeUsageQuery function generates the volume usage query to extract usage info from prometheus 
 func GenerateVolumeUsageQuery(nameSpace string, persistentVolumeName string) *http.Request {
 	logger.LogStdout()
 	prometheusURL = os.Getenv("PROMETHEUS_URL") + "/api/v1/query"
