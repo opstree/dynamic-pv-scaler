@@ -15,8 +15,8 @@ import (
 var (
 	prometheusURL string
 )
-
-type JsonResponse struct {
+// JSONResponse is a struct for json with the below mentioned keys  
+type JSONResponse struct {
 	Status string `json:"status"`
 	Data   struct {
 		ResultType string `json:"resultType"`
@@ -34,21 +34,23 @@ type JsonResponse struct {
 		} `json:"result"`
 	} `json:"data"`
 }
-
+// PersistentVolumeList is a struct for json with the below mentioned keys
 type PersistentVolumeList struct {
 	PeristentVolumeName string `json:"persistent_volume_name"`
 	Namespace           string `json:"namespace"`
 	Value               int    `json:"value"`
 }
 
+// PersistentVolumeUsage struct for a json with below mentioned keys 
 type PersistentVolumeUsage struct {
 	PeristentVolumeName string `json:"persistent_volume_name"`
 	Namespace           string `json:"namespace"`
 	Value               int    `json:"value"`
 }
-	// GetPersistentVolumeList takes namespace and PV name as input and returns persistent volume list  */
+
+// GetPersistentVolumeList takes namespace and PV name as input and returns persistent volume list  */
 func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) PersistentVolumeList {
-	var qeuryResponse JsonResponse
+	var qeuryResponse JSONResponse
 	var pvList PersistentVolumeList
 	logger.LogStdout()
 
@@ -75,9 +77,10 @@ func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) Pers
 	}
 	return pvList
 }
-	// GetPeristentVolumeUsage takes namespace and PV name as input and return persistent volume usage  */
+
+// GetPeristentVolumeUsage takes namespace and PV name as input and return persistent volume usage  */
 func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) PersistentVolumeUsage {
-	var qeuryResponse JsonResponse
+	var qeuryResponse JSONResponse
 	var pvList PersistentVolumeUsage
 	logger.LogStdout()
 
@@ -106,7 +109,7 @@ func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) Pers
 	return pvList
 }
 
-	// GetVolumeListQueryResponse function takes namespace and PV volume name as input and returns list of volumes via prometheus */
+// GetVolumeListQueryResponse function takes namespace and PV volume name as input and returns list of volumes via prometheus */
 func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 
@@ -129,7 +132,8 @@ func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *
 
 	return resp
 }
-	// GetVolumeUsageQueryResponse function takes namespace and PV volume name as input and returns Volume Usage via prometheus */
+
+// GetVolumeUsageQueryResponse function takes namespace and PV volume name as input and returns Volume Usage via prometheus */
 func GetVolumeUsageQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 

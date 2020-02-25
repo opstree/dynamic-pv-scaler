@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 )
+
 // LogStdout function prints the timestamp for logging purposes */
 func LogStdout() {
 	log.SetFormatter(&log.JSONFormatter{
