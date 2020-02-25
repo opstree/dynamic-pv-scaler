@@ -4,6 +4,7 @@
 
 [![CircleCI](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/opstree/dynamic-pv-scaler)](https://goreportcard.com/report/github.com/opstree/dynamic-pv-scaler)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e60ff968a326babe871f/maintainability)](https://codeclimate.com/github/opstree/dynamic-pv-scaler/maintainability)
 [![Docker Repository on Quay](https://img.shields.io/badge/container-ready-green "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
 [![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/opstree/dynamic-pv-scaler)
