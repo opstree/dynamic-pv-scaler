@@ -46,7 +46,7 @@ type PersistentVolumeUsage struct {
 	Namespace           string `json:"namespace"`
 	Value               int    `json:"value"`
 }
-
+	/* GetPersistentVolumeList takes namespace and PV name as input and returns persistent volume list  */
 func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) PersistentVolumeList {
 	var qeuryResponse JsonResponse
 	var pvList PersistentVolumeList
@@ -75,7 +75,7 @@ func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) Pers
 	}
 	return pvList
 }
-
+	/* GetPeristentVolumeUsage takes namespace and PV name as input and return persistent volume usage  */
 func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) PersistentVolumeUsage {
 	var qeuryResponse JsonResponse
 	var pvList PersistentVolumeUsage
@@ -106,6 +106,7 @@ func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) Pers
 	return pvList
 }
 
+	/* GetVolumeListQueryResponse function takes namespace and PV volume name as input and returns list of volumes via prometheus */
 func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 
@@ -128,7 +129,7 @@ func GetVolumeListQueryResponse(nameSpace string, persistentVolumeName string) *
 
 	return resp
 }
-
+	/* GetVolumeUsageQueryResponse function takes namespace and PV volume name as input and returns Volume Usage via prometheus */
 func GetVolumeUsageQueryResponse(nameSpace string, persistentVolumeName string) *http.Response {
 	logger.LogStdout()
 
