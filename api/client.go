@@ -11,7 +11,7 @@ const (
 	kubeConfig = "InClusterConfig"
 )
 
-// CreateClient function returns are kubernetes client */
+// CreateClient function returns are kubernetes client 
 func CreateClient() *kubernetes.Clientset {
 	config, err := rest.InClusterConfig()
 	logger.LogStdout()
