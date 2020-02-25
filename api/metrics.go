@@ -15,6 +15,7 @@ import (
 var (
 	prometheusURL string
 )
+
 // JSONResponse is a struct for json with the below mentioned keys  
 type JSONResponse struct {
 	Status string `json:"status"`

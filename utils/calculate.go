@@ -5,7 +5,6 @@ import (
 	log "github.com/sirupsen/logrus"
 	"strconv"
 )
-	
 // CalculateUpdatedSize function takes value(int) and percentage(int) as input and returns updated value for PV(int) 
 func CalculateUpdatedSize(value int, percentage int) int {
 	logger.LogStdout()
