@@ -58,4 +58,10 @@ workflows:
       - lint
       - go-vet
       - runTests
-      - build
+      - build:
+          requires:
+            - lint
+            - formatCode
+            - go-vet
+            - runTests
+

@@ -14,7 +14,7 @@ type PodList struct {
 	PodName              string `json:"pod_name"`
 	PersistentVolumeName string `json:"persistent_volume_name"`
 }
-/* ListPods function takes namespace as input and returns PodList with list of all the pods running in the given namespace */
+// ListPods function takes namespace as input and returns PodList with list of all the pods running in the given namespace */
 func ListPods(namespace string) []PodList {
 	var podLists []PodList
 	var podInformation PodList
@@ -46,7 +46,7 @@ func ListPods(namespace string) []PodList {
 	return podLists
 }
 
-/* DeletePod function takes podName and nameSpace as input and deleted the said pod in the given namespace */
+// DeletePod function takes podName and nameSpace as input and deleted the said pod in the given namespace */
 func DeletePod(podName string, nameSpace string) {
 	logger.LogStdout()
 
@@ -68,7 +68,7 @@ func DeletePod(podName string, nameSpace string) {
 	}).Info("Successfully deleted the pod to resize persistent volume")
 }
 
-/* ResizePersistentVolume takes pvcName to increase size of  in nameSpace given  and with the value requred  */
+// ResizePersistentVolume takes pvcName to increase size of  in nameSpace given  and with the value requred  */
 func ResizePersistentVolume(pvcName string, nameSpace string, value int) {
 	logger.LogStdout()
 
