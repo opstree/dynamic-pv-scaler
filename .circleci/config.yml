@@ -62,7 +62,6 @@ jobs:
     working_directory: /go/src/dynamic-pv-scaler
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Setup kubectl
           command: |
