@@ -12,7 +12,7 @@ validate_chart() {
 validate_container_state() {
     output=$(kubectl get pods -n keycloak -l app=dynamic-pv-scaler \
     -o jsonpath="{.items[*]['status.phase']}")
-    if [ "${output}" != "Running" && "${output}" != "" ]
+    if [ "${output}" != "Running" ] && [ "${output}" != "" ]
     then
         echo "Container is not healthy"
         exit 1

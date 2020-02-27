@@ -85,7 +85,7 @@ jobs:
           command: |
             kubectl create namespace dynamic-pv-scaler
       - run:
-          name: Setup Namespace
+          name: Validate Dynamic Pv Scaler
           command: |
             ./scripts/k8s-validation.sh
 
