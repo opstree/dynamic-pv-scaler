@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// LogStdout function prints the timestamp for logging purposes
 func LogStdout() {
 	log.SetFormatter(&log.JSONFormatter{
 		TimestampFormat: "02-01-2006 15:04:05",

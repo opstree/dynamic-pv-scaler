@@ -11,9 +11,54 @@ jobs:
       - run: make get-depends
       - run: make build-code
       - run: make build-image
+  Code Linting:
+    docker:
+      - image: circleci/golang:1.13
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: go get -u golang.org/x/lint/golint
+      - run: make lint
+  
+  Code Formatting:
+    docker:
+      - image: circleci/golang:1.13
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make check-fmt
+  
+  Code Bugscanning:
+    docker:
+      - image: circleci/golang:1.13
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make vet
+  
+  Unit Test:
+    docker:
+      - image: circleci/golang:1.13
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make test
 
 workflows:
   version: 2
   main:
     jobs:
-      - build
+      - Code Formatting
+      - Code Linting
+      - Code Bugscanning
+      - Unit Test
+      - build:
+          requires:
+            - Code Linting
+            - Code Formatting
+            - Code Bugscanning
+            - Unit Test
