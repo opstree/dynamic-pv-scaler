@@ -84,6 +84,10 @@ jobs:
           name: Setup Namespace
           command: |
             kubectl create namespace dynamic-pv-scaler
+      - run:
+          name: Setup Namespace
+          command: |
+            ./scripts/k8s-validation.sh
 
 workflows:
   version: 2
