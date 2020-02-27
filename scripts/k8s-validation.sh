@@ -1,12 +1,19 @@
 #!/bin/bash
 
 deploy_chart() {
+    echo "--------------Deploying Helm Chart--------------"
     helm upgrade dynamic-pv-scaler ./deploy/helm -f \
     ./deploy/helm/values.yaml --install --namespace dynamic-pv-scaler
 }
 
 validate_chart() {
+    echo "--------------Testing Helm Chart--------------"
     helm test dynamic-pv-scaler --namespace dynamic-pv-scaler
+}
+
+lint_chart() {
+    echo "--------------Linting Helm Chart--------------"
+    helm lint ./deploy/helm/.
 }
 
 validate_container_state() {
@@ -22,6 +29,7 @@ validate_container_state() {
 }
 
 main_function() {
+    lint_chart
     deploy_chart
     validate_chart
     sleep 30s
