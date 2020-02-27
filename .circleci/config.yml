@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  build:
+  Build:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -11,7 +11,7 @@ jobs:
       - run: make get-depends
       - run: make build-code
       - run: make build-image
-  Code Linting:
+  Lint:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -21,7 +21,7 @@ jobs:
       - run: go get -u golang.org/x/lint/golint
       - run: make lint
   
-  Code Formatting:
+  Format:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -30,7 +30,7 @@ jobs:
       - setup_remote_docker
       - run: make check-fmt
   
-  Code Bugscanning:
+  Bugscan:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -48,17 +48,54 @@ jobs:
       - setup_remote_docker
       - run: make test
 
+  k8s Validation:
+    machine:
+      image: circleci/classic:201808-01
+    environment:
+      K8S_VERSION: v1.15.7
+      HELM_VERSION: v3.1.0
+      KUBECONFIG: /home/circleci/.kube/config
+      MINIKUBE_VERSION: v1.7.3
+      MINIKUBE_WANTUPDATENOTIFICATION: false
+      MINIKUBE_WANTREPORTERRORPROMPT: false
+      MINIKUBE_HOME: /home/circleci
+      CHANGE_MINIKUBE_NONE_USER: true
+    steps:
+      - checkout
+      - run:
+          name: Setup kubectl
+          command: |
+            curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+            mkdir -p ${HOME}/.kube
+            touch ${HOME}/.kube/config
+      - run:
+          name: Setup minikube
+          command: |
+            curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+      - run:
+          name: Start minikube
+          command: |
+            sudo -E minikube start --vm-driver=none --cpus 2 --memory 2048 --kubernetes-version=${K8S_VERSION}
+      - run:
+          name: Setup helm
+          command: |
+            curl -Lo helm-${HELM_VERSION}-linux-amd64.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && tar -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz && chmod +x linux-amd64/helm && sudo mv linux-amd64/helm /usr/local/bin/
+      - run:
+          name: Setup Namespace
+          command: |
+            kubectl create namespace dynamic-pv-scaler
+      - run:
+          name: Validate Dynamic Pv Scaler
+          command: |
+            ./scripts/k8s-validation.sh
+
 workflows:
   version: 2
   main:
     jobs:
-      - Code Formatting
-      - Code Linting
-      - Code Bugscanning
+      - Build
+      - Format
+      - Lint
+      - Bugscan
       - Unit Test
-      - build:
-          requires:
-            - Code Linting
-            - Code Formatting
-            - Code Bugscanning
-            - Unit Test
+      - k8s Validation
