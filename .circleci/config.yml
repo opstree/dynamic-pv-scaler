@@ -54,8 +54,8 @@ workflows:
     jobs:
       - Code Formatting
       - Code Linting
-      - go-vet
-      - runTests
+      - Code Bugscanning
+      - Unit Test
       - build:
           requires:
             - Code Linting
