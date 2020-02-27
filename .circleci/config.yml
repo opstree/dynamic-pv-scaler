@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  build:
+  Build:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -11,7 +11,7 @@ jobs:
       - run: make get-depends
       - run: make build-code
       - run: make build-image
-  Code Linting:
+  Linting:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -21,7 +21,7 @@ jobs:
       - run: go get -u golang.org/x/lint/golint
       - run: make lint
   
-  Code Formatting:
+  Formatting:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -30,7 +30,7 @@ jobs:
       - setup_remote_docker
       - run: make check-fmt
   
-  Code Bugscanning:
+  Bugscanning:
     docker:
       - image: circleci/golang:1.13
     working_directory: /go/src/dynamic-pv-scaler
@@ -48,17 +48,43 @@ jobs:
       - setup_remote_docker
       - run: make test
 
+  k8s Validation:
+    docker:
+      - image: circleci/golang:1.13
+    environment:
+      K8S_VERSION: v1.15.7
+      KUBECONFIG: /home/circleci/.kube/config
+      MINIKUBE_VERSION: v1.7.3
+      MINIKUBE_WANTUPDATENOTIFICATION: false
+      MINIKUBE_WANTREPORTERRORPROMPT: false
+      MINIKUBE_HOME: /home/circleci
+      CHANGE_MINIKUBE_NONE_USER: true
+    working_directory: /go/src/dynamic-pv-scaler
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup kubectl
+          command: |
+            curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+            mkdir -p ${HOME}/.kube
+            touch ${HOME}/.kube/config
+      - run:
+          name: Setup minikube
+          command: |
+            curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+      - run:
+          name: Start minikube
+          command: |
+            sudo -E minikube start --vm-driver=none --cpus 2 --memory 4096 --kubernetes-version=${K8S_VERSION}
+
 workflows:
   version: 2
   main:
     jobs:
-      - Code Formatting
-      - Code Linting
-      - Code Bugscanning
+      - Build
+      - Formatting
+      - Linting
+      - Bugscanning
       - Unit Test
-      - build:
-          requires:
-            - Code Linting
-            - Code Formatting
-            - Code Bugscanning
-            - Unit Test
+      - k8s Validation
