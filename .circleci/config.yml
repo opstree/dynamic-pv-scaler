@@ -50,7 +50,7 @@ jobs:
 
   k8s Validation:
     machine:
-      image: circleci/classic:latest
+      image: circleci/classic:201808-01
     environment:
       K8S_VERSION: v1.15.7
       KUBECONFIG: /home/circleci/.kube/config
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Start minikube
           command: |
-            sudo -E minikube start --vm-driver=none --cpus 2 --memory 4096 --kubernetes-version=${K8S_VERSION}
+            sudo -E minikube start --vm-driver=none --cpus 2 --memory 2048 --kubernetes-version=${K8S_VERSION}
 
 workflows:
   version: 2
