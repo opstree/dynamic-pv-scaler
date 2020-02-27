@@ -53,6 +53,7 @@ jobs:
       image: circleci/classic:201808-01
     environment:
       K8S_VERSION: v1.15.7
+      HELM_VERSION: v3.1.0
       KUBECONFIG: /home/circleci/.kube/config
       MINIKUBE_VERSION: v1.7.3
       MINIKUBE_WANTUPDATENOTIFICATION: false
@@ -75,6 +76,10 @@ jobs:
           name: Start minikube
           command: |
             sudo -E minikube start --vm-driver=none --cpus 2 --memory 2048 --kubernetes-version=${K8S_VERSION}
+      - run:
+          name: Setup helm
+          command: |
+            curl -Lo https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && tar -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz && chmod +x linux-amd64/helm && sudo mv helm /usr/local/bin/
 
 workflows:
   version: 2
