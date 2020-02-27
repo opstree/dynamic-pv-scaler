@@ -17,6 +17,7 @@ lint_chart() {
 }
 
 validate_container_state() {
+    echo "--------------Validating Deployment Status--------------"
     output=$(kubectl get pods -n keycloak -l app=dynamic-pv-scaler \
     -o jsonpath="{.items[*]['status.phase']}")
     if [ "${output}" != "Running" ] && [ "${output}" != "" ]
