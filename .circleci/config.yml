@@ -79,7 +79,11 @@ jobs:
       - run:
           name: Setup helm
           command: |
-            curl -Lo helm-${HELM_VERSION}-linux-amd64.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && tar -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz && chmod +x linux-amd64/helm && sudo mv helm /usr/local/bin/
+            curl -Lo helm-${HELM_VERSION}-linux-amd64.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && tar -xvzf helm-${HELM_VERSION}-linux-amd64.tar.gz && chmod +x linux-amd64/helm && sudo mv linux-amd64/helm /usr/local/bin/
+      - run:
+          name: Setup Namespace
+          command: |
+            kubectl create namespace dynamic-pv-scaler
 
 workflows:
   version: 2
