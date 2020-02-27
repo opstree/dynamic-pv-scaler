@@ -50,7 +50,7 @@ jobs:
 
   k8s Validation:
     docker:
-      - image: circleci/golang:1.13
+      - image: circleci/classic:201808-01
     environment:
       K8S_VERSION: v1.15.7
       KUBECONFIG: /home/circleci/.kube/config
