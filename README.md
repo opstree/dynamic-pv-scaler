@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="./static/dynamic-pv-scaler.png">
+  <img src="./static/dynamic-pv-scaler.svg">
 </p>
 
 [![CircleCI](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master)
