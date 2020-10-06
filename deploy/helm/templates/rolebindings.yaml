@@ -2,12 +2,18 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ .Values.name }}-rolebindings
+  name: {{ include "dynamic-pv-scaler.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "dynamic-pv-scaler.fullname" . }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.name }}
-  namespace: {{ .Values.namespace }}
+  name: {{ include "dynamic-pv-scaler.fullname" . }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ .Values.name }}
+  name: {{ include "dynamic-pv-scaler.fullname" . }}
   apiGroup: rbac.authorization.k8s.io
