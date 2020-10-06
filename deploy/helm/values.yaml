@@ -1,12 +1,10 @@
 ---
-image:
-  name: quay.io/opstree/dynamic-pv-scaler
-  tag: latest
-  imagePullPolicy: IfNotPresent
-
-prometheus:
-  url: http://prometheus.opstree.com
-
+name: dynamic-pv-scaler
+namespace: dynamic-pv-scaler
+imageName: quay.io/opstree/dynamic-pv-scaler
+imageTag: latest
+prometheusUrl: http://prometheus.opstree.com
+configFileLocation: /etc/ot-conf.d/config.yaml
 configMaps:
   config.yaml: |
     ---
@@ -14,6 +12,3 @@ configMaps:
       scale_percentage: 50
       threshold_percentage: 80
       pvc_name: data-mysql-0
-
-serviceAccount:
-  create: true

@@ -1,21 +1,11 @@
----
 apiVersion: v1
-appVersion: "v0.1.0"
-description: A golang based Kubernetes application which has been created to overcome the scaling issue of Persistent Volume in Kubernetes. 
-engine: gotpl
-name: dynamic-pv-scaler
-version: 0.1.0
+description: Opstree Persistent Volume Scaler
 home: https://github.com/opstree/dynamic-pv-scaler
 maintainers:
-- email: abhishekbhardwaj510@gmail.com
-  name: iamabhishek-dubey
-- email: sandeep@opstree.com
-  name: sandy724
+- email: opensource@opstree.com
+  name: OpsTree Solutions
+name: dynamic-pv-scaler
+version: 1.0.0
+appVersion: 1.0.0
 sources:
   - https://github.com/opstree/dynamic-pv-scaler
-keywords:
-- kubernetes
-- prometheus
-- persistent-volume
-- openshift
-icon: https://github.com/opstree/dynamic-pv-scaler/raw/master/static/dynamic-pv-scaler.svg

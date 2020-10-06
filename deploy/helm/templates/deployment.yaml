@@ -2,45 +2,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dynamic-pv-scaler.fullname" . }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    app.kubernetes.io/name: {{ include "dynamic-pv-scaler.fullname" . }}
-    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion }}
-  annotations:
-    {{- toYaml .Values.annotations | nindent 4 }}
+    app: {{ .Values.name }}
 spec:
-  replicas: {{ .Values.replicas }}
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "dynamic-pv-scaler.fullname" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "dynamic-pv-scaler.fullname" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: {{ include "dynamic-pv-scaler.fullname" . }}
-        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.imagePullPolicy }} 
+      - name: {{ .Values.name }}
+        image: {{ .Values.imageName }}:{{ .Values.imageTag }}
+        imagePullPolicy: Always 
         env:
         - name: PROMETHEUS_URL 
-          value: {{ .Values.prometheus.url }}
+          value: {{ .Values.prometheusUrl }}
         - name: CONFIG_FILE 
-          value: "/etc/opstree.conf.d/config.yaml"
+          value: {{ .Values.configFileLocation }}
         volumeMounts:
-          - mountPath: /etc/opstree.conf.d/config.yaml
-            name: {{ include "dynamic-pv-scaler.fullname" . }}-config
+          - mountPath: {{ .Values.configFileLocation }}
+            name: {{ .Values.name }}-config
             subPath: config.yaml
       volumes:
-        - name: {{ include "dynamic-pv-scaler.fullname" . }}-config
+        - name: {{ .Values.name }}-config
           configMap:
-            name: {{ include "dynamic-pv-scaler.fullname" . }}-config
-{{- if .Values.serviceAccount.create }}
-      serviceAccount: {{ include "dynamic-pv-scaler.fullname" . }}
-      serviceAccountName: {{ include "dynamic-pv-scaler.fullname" . }}
-{{- end }}
+            name: {{ .Values.name }}-config
+      serviceAccount: {{ .Values.name }}
+      serviceAccountName: {{ .Values.name }}
