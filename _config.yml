@@ -1,3 +1,0 @@
-title: Dynamic PV Scaler
-description: A Golang based Kubernetes application which can scale volume dynamically
-theme: jekyll-theme-cayman
