@@ -1,5 +1,5 @@
 ---
-name: CI Pipeline for Codebase
+name: CI Pipeline for Go
 
 on: [push, pull_request]
 
@@ -39,8 +39,8 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.29
+    - uses: actions/checkout@v2
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        version: v1.29
