@@ -1,6 +1,8 @@
 ---
 name: CI Pipeline for Codebase
 
+on: [push, pull_request]
+
 jobs:
   build:
     name: Lint Code Base
