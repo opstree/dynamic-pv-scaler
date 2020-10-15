@@ -2,7 +2,7 @@
   <img src="./static/dynamic-pv-scaler.svg" height="180" width="180">
 </p>
 
-[![CircleCI](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master.svg?style=shield)](https://circleci.com/gh/opstree/dynamic-pv-scaler/tree/master)
+[![GitHub Super-Linter](https://github.com/opstree/dynamic-pv-scaler/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/opstree/dynamic-pv-scaler)
 [![Go Report Card](https://goreportcard.com/badge/github.com/opstree/dynamic-pv-scaler)](https://goreportcard.com/report/github.com/opstree/dynamic-pv-scaler)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e60ff968a326babe871f/maintainability)](https://codeclimate.com/github/opstree/dynamic-pv-scaler/maintainability)
 [![Docker Repository on Quay](https://img.shields.io/badge/container-ready-green "Docker Repository on Quay")](https://quay.io/repository/opstree/dynamic-pv-scaler)
