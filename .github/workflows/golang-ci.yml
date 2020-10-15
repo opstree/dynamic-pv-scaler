@@ -1,5 +1,5 @@
 ---
-name: CI Pipeline for Go
+name: Build Code Base
 
 on: [push, pull_request]
 

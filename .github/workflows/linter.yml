@@ -18,3 +18,4 @@ jobs:
           VALIDATE_YAML: true
           VALIDATE_GO: true
           DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
