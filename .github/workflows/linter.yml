@@ -17,5 +17,5 @@ jobs:
           VALIDATE_BASH: true
           VALIDATE_YAML: true
           VALIDATE_GO: true
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
