@@ -17,7 +17,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_BASH: true
           VALIDATE_YAML: true
-          VALIDATE_GO: true
+          VALIDATE_GO: false
           DEFAULT_BRANCH: master
           VALIDATE_DOCKERFILE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
