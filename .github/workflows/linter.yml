@@ -4,20 +4,12 @@ name: Lint Code Base
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Lint Code Base
+  golangci:
+    name: lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Lint Code Base
-        uses: docker://github/super-linter:v3.12.0
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          VALIDATE_BASH: true
-          VALIDATE_YAML: true
-          VALIDATE_GO: false
-          DEFAULT_BRANCH: master
-          VALIDATE_DOCKERFILE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.29
