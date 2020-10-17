@@ -66,7 +66,15 @@ func GetPersistentVolumeList(nameSpace string, persistentVolumeName string) Pers
 		}).Error(err)
 	}
 
-	json.Unmarshal(output, &qeuryResponse)
+	err = json.Unmarshal(output, &qeuryResponse)
+
+	if err != nil {
+		log.WithFields(log.Fields{
+			"kubeconfig":        kubeConfig,
+			"namespace":         nameSpace,
+			"persistent_volume": persistentVolumeName,
+		}).Error(err)
+	}
 
 	for _, queryOutput := range qeuryResponse.Data.Result {
 		finalValue, _ := strconv.ParseFloat(strings.Join(queryOutput.Value, ""), 64)
@@ -97,7 +105,16 @@ func GetPeristentVolumeUsage(nameSpace string, persistentVolumeName string) Pers
 		}).Error(err)
 	}
 
-	json.Unmarshal(output, &qeuryResponse)
+	err = json.Unmarshal(output, &qeuryResponse)
+
+	if err != nil {
+		log.WithFields(log.Fields{
+			"kubeconfig":        kubeConfig,
+			"namespace":         nameSpace,
+			"persistent_volume": persistentVolumeName,
+		}).Error(err)
+	}
+
 	for _, queryOutput := range qeuryResponse.Data.Result {
 		finalValue, _ := strconv.Atoi(strings.Join(queryOutput.Value, ""))
 		gbValue := finalValue/1024/1024/1024 + 1
