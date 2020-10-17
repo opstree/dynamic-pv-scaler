@@ -89,7 +89,13 @@ func ResizePersistentVolume(pvcName string, nameSpace string, value int) {
 			"pvc": pvcName,
 		}).Error(err.Error())
 	}
-	clientset.CoreV1().PersistentVolumeClaims(nameSpace).Update(rawPersistentVolumeClaim)
+	_, err = clientset.CoreV1().PersistentVolumeClaims(nameSpace).Update(rawPersistentVolumeClaim)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"pvc": pvcName,
+		}).Error(err.Error())
+	}
+
 	log.WithFields(log.Fields{
 		"pvc": pvcName,
 	}).Info("Successfully resized the pvc, the new size is " + updateValue)

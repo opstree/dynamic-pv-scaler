@@ -17,7 +17,8 @@ func yamlToJSON(filename string) []map[string]interface{} {
 	checkError(err)
 
 	var results []map[string]interface{}
-	json.Unmarshal(data, &results)
+	err = json.Unmarshal(data, &results)
+	checkError(err)
 	return results
 }
 
