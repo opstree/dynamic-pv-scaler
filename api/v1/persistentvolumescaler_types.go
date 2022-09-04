@@ -20,22 +20,20 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
 // PersistentVolumeScalerSpec defines the desired state of PersistentVolumeScaler
 type PersistentVolumeScalerSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	PVCRefName      []string        `json:"pvcRefName"`
+	ScaleParameters ScaleParameters `json:"scaleParameters"`
+}
 
-	// Foo is an example field of PersistentVolumeScaler. Edit persistentvolumescaler_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+// ScaleParameters defines the scaling parameters for PersistentVolume
+type ScaleParameters struct {
+	ThresholdValue int32 `json:"thresholdValuePercentage"`
+	ScaleValue     int32 `json:"scaleValuePercentage"`
 }
 
 // PersistentVolumeScalerStatus defines the observed state of PersistentVolumeScaler
 type PersistentVolumeScalerStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
 }
 
 //+kubebuilder:object:root=true
