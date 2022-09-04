@@ -1,6 +1,0 @@
----
-remote: origin
-target-branch: master
-chart-dirs:
-  - deploy/helm
-helm-extra-args: --timeout 600s

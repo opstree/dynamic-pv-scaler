@@ -1,0 +1,20 @@
+# permissions for end users to view persistentvolumescalers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: persistentvolumescaler-viewer-role
+rules:
+- apiGroups:
+  - pvc.scaler.opstreelabs.in
+  resources:
+  - persistentvolumescalers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - pvc.scaler.opstreelabs.in
+  resources:
+  - persistentvolumescalers/status
+  verbs:
+  - get

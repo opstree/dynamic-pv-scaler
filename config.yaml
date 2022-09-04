@@ -1,5 +1,0 @@
----
-- namespace: database
-  scale_percentage: 50
-  threshold_percentage: 80
-  pvc_name: data-mysql-0

@@ -1,0 +1,9 @@
+apiVersion: pvc.scaler.opstreelabs.in/v1
+kind: PersistentVolumeScaler
+metadata:
+  name: sample-scaling
+spec:
+  pvcRefName: ["data-mysql-0","data-mysql-1","data-mysql-2"]
+  scaleParameters:
+    thresholdValuePercentage: 80
+    scaleValuePercentage: 20

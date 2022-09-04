@@ -1,0 +1,24 @@
+# permissions for end users to edit persistentvolumescalers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: persistentvolumescaler-editor-role
+rules:
+- apiGroups:
+  - pvc.scaler.opstreelabs.in
+  resources:
+  - persistentvolumescalers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - pvc.scaler.opstreelabs.in
+  resources:
+  - persistentvolumescalers/status
+  verbs:
+  - get
