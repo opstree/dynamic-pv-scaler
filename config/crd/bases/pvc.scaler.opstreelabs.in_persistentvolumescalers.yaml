@@ -40,14 +40,14 @@ spec:
                 items:
                   type: string
                 type: array
+              restartPods:
+                type: boolean
               scaleParameters:
                 description: ScaleParameters defines the scaling parameters for PersistentVolume
                 properties:
                   scaleValuePercentage:
-                    format: int32
                     type: integer
                   thresholdValuePercentage:
-                    format: int32
                     type: integer
                 required:
                 - scaleValuePercentage
