@@ -18,11 +18,16 @@ package controllers
 
 import (
 	"context"
+	"time"
 
+	"dynamic-pv-scaler/k8sgo"
+	"dynamic-pv-scaler/promutils"
+	"dynamic-pv-scaler/utils"
+	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
-	"sigs.k8s.io/controller-runtime/pkg/log"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	pvcv1 "dynamic-pv-scaler/api/v1"
 )
@@ -43,11 +48,40 @@ type PersistentVolumeScalerReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.12.2/pkg/reconcile
 func (r *PersistentVolumeScalerReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
+	instance := &pvcv1.PersistentVolumeScaler{}
+	err := r.Client.Get(context.TODO(), req.NamespacedName, instance)
+	if err != nil {
+		if errors.IsNotFound(err) {
+			return ctrl.Result{RequeueAfter: time.Second * 10}, nil
+		}
+		return ctrl.Result{RequeueAfter: time.Second * 10}, err
+	}
+	if err := controllerutil.SetControllerReference(instance, instance, r.Scheme); err != nil {
+		return ctrl.Result{RequeueAfter: time.Second * 10}, err
+	}
 
-	// TODO(user): your logic here
-
-	return ctrl.Result{}, nil
+	for _, pvcInfo := range instance.Spec.PVCRefName {
+		params := promutils.QueryInputs{
+			Namespace:        instance.Namespace,
+			PersistentVolume: pvcInfo,
+		}
+		currentPercentage, err := promutils.GetPersistentVolumeUsagePercentage(params)
+		if err != nil {
+			return ctrl.Result{RequeueAfter: time.Second * 10}, err
+		}
+		if (100 - currentPercentage.Value) <= instance.Spec.ScaleParameters.ThresholdValue {
+			totalCapacity, err := promutils.GetPersistentVolumeTotalCapacity(params)
+			if err != nil {
+				return ctrl.Result{RequeueAfter: time.Second * 10}, err
+			}
+			_ = utils.CalculateUpdatedSize(totalCapacity.Value, instance.Spec.ScaleParameters.ScaleValue)
+			_, err = k8sgo.ListAssociatedPodsWithPVC(pvcInfo, instance.Namespace)
+			if err != nil {
+				return ctrl.Result{RequeueAfter: time.Second * 10}, err
+			}
+		}
+	}
+	return ctrl.Result{RequeueAfter: time.Second * 10}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.

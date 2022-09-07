@@ -24,12 +24,13 @@ import (
 type PersistentVolumeScalerSpec struct {
 	PVCRefName      []string        `json:"pvcRefName"`
 	ScaleParameters ScaleParameters `json:"scaleParameters"`
+	RestartPods     *bool           `json:"restartPods,omitempty"`
 }
 
 // ScaleParameters defines the scaling parameters for PersistentVolume
 type ScaleParameters struct {
-	ThresholdValue int32 `json:"thresholdValuePercentage"`
-	ScaleValue     int32 `json:"scaleValuePercentage"`
+	ThresholdValue int `json:"thresholdValuePercentage"`
+	ScaleValue     int `json:"scaleValuePercentage"`
 }
 
 // PersistentVolumeScalerStatus defines the observed state of PersistentVolumeScaler
